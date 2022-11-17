@@ -1,0 +1,94 @@
+﻿@model IEnumerable<ProductList.Models.ProductDTO>
+
+@{
+    ViewData["Title"] = "Product List";
+}
+
+<h1>Product List</h1>
+
+<a asp-area="" class="btn btn-outline-primary" asp-controller="Categories" asp-action="Index">View Categories</a>
+<a asp-area="" class="btn btn-outline-success" asp-controller="Products" asp-action="Create">Create Product</a>
+<br />
+<br />
+
+@{
+    var isNext = ViewData["nextEnable"];
+    var pageNumber = ViewData["pageNumber"];
+    var isPrevious = ViewData["prevEnable"];
+    var prevPageNo = ViewData["prevPage"];
+    var nextPageNo = ViewData["nextPage"];
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            @Html.Raw(@ViewBag.Alert)
+        </div>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                <button class="btn btn-warning">
+                    @Html.ActionLink("Update", "Edit", new { id = item.ProductId })
+                </button>
+                <button class="btn btn-danger">
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
+                </button>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-center">
+
+    @if ((bool)isPrevious == false)
+    {
+        <button asp-area="" class="btn btn-outline-info" disabled="@isPrevious">
+            @Html.ActionLink("< Previous", "ProductList", "Products", new { id = prevPageNo })
+        </button>
+    }
+    <label>
+        @pageNumber
+    </label>
+    @if ((bool)isNext == false)
+    {
+        <button asp-area="" class="btn btn-outline-light" disabled="@isNext">
+            @Html.ActionLink("Next >", "ProductList", "Products", new { id = nextPageNo })
+        </button>
+    }
+</div>

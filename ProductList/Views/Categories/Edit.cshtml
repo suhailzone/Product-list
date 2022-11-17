@@ -1,0 +1,24 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+*@
+@model ProductList.Models.Category
+@{
+    
+}
+<div class="text-center container">
+
+    <h1>Update product</h1>
+
+    <a href="javascript: history.go(-1)">Go Back</a>
+
+    <form method="post" class="mx-auto mt-5 mb-5 px-5 pt-5 rounded-5 pb-5 bg-light col-4" asp-controller="Categories" asp-action="Edit">
+
+        <input type="hidden" asp-for="CategoryId" name="CategoryId" class="w-100" placeholder="Category Id" autocomplete="off">
+
+        <input type="text" asp-for="CategoryName" name="CategoryName" class="w-100" placeholder="Category Name" autocomplete="off">
+
+        <button class="btn btn-success rounded-5 btn-sm mt-3" type="submit">Update</button>
+
+    </form>
+</div>
